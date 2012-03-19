@@ -1,4 +1,47 @@
 README
 ======
 
-This is a node.js based socket server for routing live NPI dispatches.
+This is a node.js based socket server for routing live NPI dispatches.  It will also have a database logging component which will hold all the events that take place in NPI space.
+
+
+ROADMAP
+=======
+
+This server is going to have to have some web components as well, or at least will have to itself read from a database which is accessible by some external means to handle the subscriptions and other userly pursuits.  So, in effect, it should refresh user account information via some push notification when updates are made, or on some regular schedule.  This won't scale well if we reload the whole database, so perhaps we could use a queing service like beanstalkd to hold jobs that should be reloaded and then scale them as we see fit.
+
+CLIENTS
+=======
+
+Clients will log into the server, and then remain connected, either waiting for push notifications from the server, or broadcasting notifications to the server.  The server will then pass notifications to other users, and also write those events to a database backend.  In this way, we have one central repository for all events.
+
+NPI DATASTORE
+=============
+
+This is a MongoDB database of Entities, which are generic objects with a time, place, type and with a data packet containing arbitrary information.
+
+
+BIG RED BUTTON PARTY LINE - v0.1
+================================
+
+This is the first release point I'm defining for this server.  It will do the following things:
+
+* Allow a client to connect and receive notices from all other clients
+* may broadcast BUTTON_PRESS and BUTTON_RELEASE events to all other clients
+* broadcasts will create new Entities in the mongo database
+
+FUTURE VERSIONS ROADMAP
+=======================
+
+==v0.2==
+
+* Messages are routed only to users who have subscribed to receive them
+* Subscriptions are handled through a web interface
+* Web interface may be hosted with Node, or it may rely upon a separate django installation
+
+==v0.3==
+
+* routing of multiple types of messages aside from just button presses
+  * chat logs
+  * images
+  * twitter
+  * videos
