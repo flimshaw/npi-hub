@@ -3,7 +3,6 @@ README
 
 This is a node.js based socket server for routing live NPI dispatches.  It will also have a database logging component which will hold all the events that take place in NPI space.
 
-
 ROADMAP
 =======
 
