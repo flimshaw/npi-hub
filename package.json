@@ -1,0 +1,12 @@
+{
+	"name": "npi-hub",
+	"description": "Socket server that handles NPI traffic",
+	"version": "0.0.1",
+	"author": "Charlie Hoey <charlie.hoey@gmail.com>",
+	"dependencies": {
+		"colors": "*"
+	},
+	"engine": {
+		"node": ">= 0.6.0"	
+	}
+}
