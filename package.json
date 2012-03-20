@@ -4,7 +4,7 @@
 	"version": "0.0.1",
 	"author": "Charlie Hoey <charlie.hoey@gmail.com>",
 	"dependencies": {
-		"colors": "*"
+		"mongojs": ">= 0.3.x"
 	},
 	"engine": {
 		"node": ">= 0.6.0"	
