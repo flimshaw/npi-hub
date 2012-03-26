@@ -17,7 +17,7 @@ Array.prototype.remove = function(e) {
 
 // heartbreakingly basic client class
 function Client(stream) {
-    this.name = null;
+    this.name = 'default'; // disables the login process, we're keeping this real simple
     this.stream = stream;
 }
 
@@ -31,7 +31,7 @@ var server = net.createServer(function(stream) { //'connection' listener
     stream.setEncoding("utf8");
 
     stream.addListener("connect", function () {
-	stream.write("login:\n");
+	//stream.write("login:\n");
     });
 
     stream.addListener("data", function (data) {
@@ -47,7 +47,21 @@ var server = net.createServer(function(stream) { //'connection' listener
 	    });
 	    return;
 	}
+
+	// broadcast the packet we received to all the other users
+	clients.forEach(function(c) {
+	    if (c != client) {
+		c.stream.write(data);
+	    }
+	});
+
     });
+
+    stream.addListener("end", function() {
+	clients.remove(client);
+    });
+
+
 
 });
 
